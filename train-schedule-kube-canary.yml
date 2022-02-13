@@ -1,5 +1,6 @@
-kind: service
+---
 apiVersion: v1
+kind: Service
 metadata:
   name: train-schedule-service-canary
 spec:
@@ -11,6 +12,8 @@ spec:
   - protocol: TCP
     port: 8080
     nodePort: 8081
+
+...
 
 ---
 
