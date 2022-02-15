@@ -53,23 +53,24 @@ pipeline {
                 )
             }
         }
-       // stage('SmokeTest') { 
-       //     when { 
-       //         branch 'master' 
-       //     } 
-       //     steps { 
-       //        script { 
-       //           def response = httpRequest ( 
-       //                 url: "http://18.141.225.141:30001/", 
-       //                 timeout: 30 
-       //           ) 
-       //           if (response.status != 200) { 
-       //             error("Smoke test against canary deployment failed.") 
-       //           } 
-       //        }  
-       //     } 
-       // } 
-        
+        stage("SmokeTest") { 
+            when { 
+                branch 'master' 
+            } 
+            steps { 
+               script { 
+                   sleep 5
+                   def response = httpRequest ( 
+                        url: "http://18.141.225.141:30001/", 
+                        timeout: 30 
+                  ) 
+                  if (response.status != 200) { 
+                    error("Smoke test against canary deployment failed.") 
+                  } 
+               }  
+            } 
+        } 
+       
         stage('DeployToProduction') {
             when {
                 branch 'master'
