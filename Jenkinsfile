@@ -54,20 +54,20 @@ pipeline {
             }
         }
         stage('SmokeTest') { 
-          when { 
-            branch 'master' 
-          } 
-          steps { 
-            script { 
-                 def response = httpRequest ( 
-                 url: "http://$KUBE_MASTER_IP:30001/", 
-                 timeout: 30 
-                 ) 
-                 if (response.status != 200) { 
-                    error("Smoke test against canary deployment failed.") 
-                 } 
+            when { 
+                branch 'master' 
             } 
-          } 
+            steps { 
+               script { 
+                  def response = httpRequest ( 
+                        url: "http://18.141.225.141:30001/", 
+                        timeout: 30 
+                  ) 
+                  if (response.status != 200) { 
+                    error("Smoke test against canary deployment failed.") 
+                  } 
+               }  
+            } 
         } 
         
         stage('DeployToProduction') {
