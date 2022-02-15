@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
                 DOCKER_IMAGE_NAME = "saisourav/train-schedule"
+                CANARY_REPLICAS = 0
     }
     stages {
         stage('Build') {
